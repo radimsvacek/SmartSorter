@@ -10,7 +10,11 @@ Under GNU GPLv2 license
 
 ##Dependencies
 Qt
+
 QWebKit
+
 Poppler
+
 LibExif
+
 Perl & Python interpret
