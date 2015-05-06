@@ -1,3 +1,9 @@
+/**********************************/
+// This file is part of SmartSorter
+// Author: Radim Svacek
+// Created: 2015
+/**********************************/
+
 #ifndef HTML_PLUGIN_H
 #define HTML_PLUGIN_H
 

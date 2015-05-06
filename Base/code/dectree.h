@@ -1,3 +1,9 @@
+/**********************************/
+// This file is part of SmartSorter
+// Author: Radim Svacek
+// Created: 2015
+/**********************************/
+
 #ifndef dectree_h
 #define dectree_h
 

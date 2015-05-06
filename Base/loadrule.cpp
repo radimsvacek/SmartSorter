@@ -1,3 +1,9 @@
+/**********************************/
+// This file is part of SmartSorter
+// Author: Radim Svacek
+// Created: 2015
+/**********************************/
+
 #include "loadrule.h"
 #include "ui_loadrule.h"
 

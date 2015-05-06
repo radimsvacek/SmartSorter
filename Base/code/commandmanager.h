@@ -1,3 +1,9 @@
+/**********************************/
+// This file is part of SmartSorter
+// Author: Radim Svacek
+// Created: 2015
+/**********************************/
+
 #ifndef COMMANDMANAGER_H
 #define COMMANDMANAGER_H
 

@@ -1,3 +1,9 @@
+/**********************************/
+// This file is part of SmartSorter
+// Author: Radim Svacek
+// Created: 2015
+/**********************************/
+
 #include "basic_classif.h"
 
 // Create some basic attributes with can be used for every file format
