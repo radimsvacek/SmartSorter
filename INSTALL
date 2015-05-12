@@ -1,1 +1,8 @@
-soon
+Make sure that you have installed Qt 4.8 and libraries Poppler and LibExif.
+
+Then follow these steps:
+  mkdir build && cd build
+  qmake ../smart_sorter.pro
+  make
+  
+Now you can run SmartSorter!
