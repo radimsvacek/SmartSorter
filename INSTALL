@@ -4,5 +4,6 @@ Then follow these steps:
   mkdir build && cd build
   qmake ../smart_sorter.pro
   make
+  make clean
   
-Now you can run SmartSorter!
+Now you can run SmartSorter, which is located in folder Base ...
