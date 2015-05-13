@@ -63,3 +63,18 @@ first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
+
+
+tools.files += tool/fdupe.pl\
+tools.files += tool/facedetect/facedetect\
+
+tools.path =  /usr/local/bin/tool
+
+
+
+target.path =  /usr/local/bin
+INSTALLS += target tools tools2
+
+
+
+

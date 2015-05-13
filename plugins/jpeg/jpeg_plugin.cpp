@@ -41,7 +41,7 @@ void JPEG_plugin::Initialize(){
     ops.push_back(IS_TRUE);
 
 
-    if(QFile(FACEDETECT_SCRIPT_PATH).exists()){
+    if(QFile(FACEDETECT_SCRIPT_PATH).exists() || QFile(FACEDETECT_SCRIPT_PATH2).exists()){
         a = new Attribute(PROPERTY_FACE,ops,TRUE_TYPE);
         Properties.push_back(a);
     }
@@ -307,11 +307,16 @@ bool JPEG_plugin::IsFaceConditionTrue(int faceIn, File *file){
     // Face in picture
     QProcess *faceDetect = new QProcess;
     QStringList args;
+    QString scriptPath;
 
-    if(!QFile(FACEDETECT_SCRIPT_PATH).exists())
+    if(QFile(FACEDETECT_SCRIPT_PATH).exists())
+        scriptPath = FACEDETECT_SCRIPT_PATH;
+    else if (QFile(FACEDETECT_SCRIPT_PATH2).exists())
+        scriptPath = FACEDETECT_SCRIPT_PATH2;
+    else
         return false;
 
-    args << FACEDETECT_SCRIPT_PATH << "-q" << file->GetPath();
+    args << scriptPath << "-q" << file->GetPath();
     faceDetect->start("python",args);
 
     if(!faceDetect->waitForStarted(timeForScript)){

@@ -5,3 +5,9 @@ SUBDIRS     = Base \
               plugins/jpeg\
               plugins/pdf\
 
+
+
+destdir.path = /home/radim/TEST
+INSTALLS += destdir
+
+

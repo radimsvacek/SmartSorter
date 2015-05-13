@@ -28,3 +28,7 @@ DESTDIR = ../../Base/plugins
 TARGET = $$qtLibraryTarget(html_plugin)
 
 
+target.path = /usr/local/bin/plugins
+INSTALLS += target
+
+

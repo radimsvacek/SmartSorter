@@ -1,6 +1,6 @@
 /**********************************/
 // This file is part of SmartSorter
-// Author: Radim Svacek
+// Author: Radim Svaceka
 // Created: 2015
 /**********************************/
 

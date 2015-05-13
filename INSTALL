@@ -5,5 +5,7 @@ Then follow these steps:
   qmake ../smart_sorter.pro
   make
   make clean
+  sudo make install
   
-Now you can run SmartSorter, which is located in folder Base ...
+The last command says "sudo" so we can write it to /usr/local 
+Now you can run SmartSorter!

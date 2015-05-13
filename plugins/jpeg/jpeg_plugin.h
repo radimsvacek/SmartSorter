@@ -51,7 +51,8 @@ private:
 
     int timeForScript = 10000;
 
-    const QString FACEDETECT_SCRIPT_PATH = "tool/facedetect/facedetect";
+    const QString FACEDETECT_SCRIPT_PATH = "/usr/local/bin/tool/facedetect";
+    const QString FACEDETECT_SCRIPT_PATH2 = "tool/facedetect/facedetect";
 
     const QString PROPERTY_RESOLUTION = "Resolution (MPx)";
     const QString PROPERTY_CAMERA = "Camera";

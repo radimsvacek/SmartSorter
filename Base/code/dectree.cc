@@ -304,45 +304,51 @@ void DecTree::RemoveTree(){
 
 // Check if script for duplicity really exists
 bool DecTree::IsDuplicityScriptExists(){
-    return QFile(duplicityScriptPath).exists();
+    return (QFile(duplicityScriptPath).exists() || QFile(duplicityScriptPath2).exists());
 }
 
 // Delete all duplicity files exclude one
 void DecTree::DeleteDuplicityFiles(QString path){
+    QString scriptPath;
+
+    if(QFile(duplicityScriptPath).exists())
+        scriptPath = duplicityScriptPath;
+    else if(QFile(duplicityScriptPath2).exists())
+        scriptPath = duplicityScriptPath2;
+    else return;
+
+
     // Clear command in case of previous work
     commandManager->ClearCommands();
-
-    // Just in case .. delete tmp files
-    QFile::remove(".SmartSorter_files_to_removed");
-    QFile::remove(".SmartSorter_log");
-
     Command *command = NULL;
+
     QStringList params;
+    params << scriptPath << path;
+    QProcess deleteScript;
+    deleteScript.start("perl",params);
 
-    if(!QFile(duplicityScriptPath).exists())
-        return;
-
-    params << duplicityScriptPath << path;
-
-    if(QProcess::execute("perl",params) < 0){
-        logsOut->insertHtml("Error: while loading script for delete duplicity files<br>");
-    }
-
-    QFile textFile(".SmartSorter_files_to_removed");
-    if(!textFile.open(QIODevice::ReadOnly)) {
-        logsOut->insertHtml("Error:" + textFile.errorString());
+    if(!deleteScript.waitForStarted(timeForScript)){
+        logsOut->insertHtml("Error durring running duplicity script <br>");
         return;
     }
 
-    QTextStream in(&textFile);
-    QString line;
+    deleteScript.waitForFinished(-1);
+    QString output(deleteScript.readAllStandardOutput());
+
+    QStringList files = output.split("\n");
     int counter = 0;
-    while(!in.atEnd()) {
+
+    foreach(QString line,files){
+        if(line.isEmpty())
+            continue;
+
+        qDebug() << line;
+
         if(counter++ > REFRESH_GUI){
             qApp->processEvents();
             counter=0;
         }
-        line = in.readLine();
+
         QFile file(line);
         QFileInfo fileInfo(file.fileName());
         command = new DeleteCommand;
@@ -350,10 +356,6 @@ void DecTree::DeleteDuplicityFiles(QString path){
         commandManager->ExecuteCommand(command);
     }
 
-    textFile.close();
-
-    QFile::remove(".SmartSorter_files_to_removed");
-    QFile::remove(".SmartSorter_log");
 }
 
 

@@ -40,6 +40,7 @@ class DecTree{
         void EmptyTrash(QStringList,QString);
 
 	private:
+        int timeForScript = 10000;
         Node * CreateBranchAndNode(Node * ,Condition *);
         std::vector<Node *> FindSubTrees(QString);
         Operation * FindBestResult(File *, Node *);
@@ -50,7 +51,8 @@ class DecTree{
         CommandManager *commandManager;
         QTextBrowser *logsOut;
         QString trashPath;
-        QString duplicityScriptPath = "tool/delete_duplicity.pl";
+        QString duplicityScriptPath = "/usr/local/bin/tool/fdupe.pl";
+        QString duplicityScriptPath2 = "tool/fdupe.pl";
 };
 
 #endif

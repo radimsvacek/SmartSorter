@@ -98,20 +98,14 @@ sub mycmp ($) {
 
 # ------------------------------
 
-print "collecting files and sizes ...\n";
+#print "collecting files and sizes ...\n";
 
-if (-t STDIN) {
-	$ARGV[0] = '.' unless $ARGV[0]; # use wd if no arguments given
-	map scan $_, @ARGV;
-} else {	
-	while (<STDIN>)  {
-		s°[\r\n]$°°g;
-		push @{$farray{-s $_}},$_
-		 unless (-l or -S  or -p or -c or -b);
-	}
-}
 
-print "now comparing ...\n";
+$ARGV[0] = '.' unless $ARGV[0]; # use wd if no arguments given
+map scan $_, @ARGV;
+
+
+#print "now comparing ...\n";
 for my $fsize (reverse sort {$a <=> $b} keys %farray) {
 
   my ($i,$fptr,$fref,$pnum,%dupes,%index,$chunk);
@@ -144,10 +138,16 @@ for my $fsize (reverse sort {$a <=> $b} keys %farray) {
   }
   # show found dupes for actual size
   for $i (keys %dupes) {
+	my $counter = 0;
     $#{$dupes{$i}} || next;
-    print "\n size: $fsize\n\n";
+    #print "\n size: $fsize\n\n";
     for (@{$dupes{$i}}) {
-        print $$_,"\n"; 
+		if(++$counter >= scalar @{$dupes{$i}}){
+			last;
+		}
+
+        print $$_,"\n";
+#		last;		 
     }
   }
 }

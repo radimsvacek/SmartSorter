@@ -1,9 +1,3 @@
-/**********************************/
-// This file is part of SmartSorter
-// Author: Radim Svacek
-// Created: 2015
-/**********************************/
-
 #ifndef BASIC_CLASSIF_H
 #define BASIC_CLASSIF_H
 

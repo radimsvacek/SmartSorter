@@ -5,13 +5,11 @@
 #-------------------------------------------------
 
 
-
-
 TEMPLATE = lib
 CONFIG += plugin
 QT       += core gui
 QMAKE_CXXFLAGS += -std=c++11
-LIBS         += -L/usr/local/lib -lexif
+LIBS         += -lexif
 SOURCES += jpeg_plugin.cpp\
           ../../Base/code/attribute.cpp\
           ../../Base/code/file.cc\
@@ -21,7 +19,7 @@ HEADERS  += jpeg_plugin.h\
           ../../Base/code/attribute.h\
           ../../Base/code/file.h\
           ../../Base/code/treebranch.h\
-          libexif/exif-data.h
+
 
 INCLUDEPATH  += ../../Base
 
@@ -35,3 +33,10 @@ export(first.depends)
 export(copytool.commands)
 QMAKE_EXTRA_TARGETS += first copytool
 
+target.path =  /usr/local/bin/plugins
+
+tools.files += tool/facedetect/facedetect\
+
+tools.path =  /usr/local/bin/tool
+
+INSTALLS += target tools

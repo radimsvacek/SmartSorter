@@ -11,7 +11,7 @@ TEMPLATE = lib
 CONFIG += plugin
 QT       += core gui
 QMAKE_CXXFLAGS += -std=c++11
-LIBS += -L/usr/local/lib -lpoppler-qt4
+LIBS += -lpoppler-qt4
 SOURCES += pdf_plugin.cpp\
           ../../Base/code/attribute.cpp\
           ../../Base/code/file.cc\
@@ -19,7 +19,6 @@ SOURCES += pdf_plugin.cpp\
 
 HEADERS  += pdf_plugin.h\
           ../../Base/code/attribute.h\
-          ../../Base/poppler/src/poppler-qt4.h\
           ../../Base/code/file.h\
           ../../Base/code/treebranch.h
 
@@ -28,3 +27,5 @@ DESTDIR = ../../Base/plugins
 TARGET = $$qtLibraryTarget(pdf_plugin)
 
 
+target.path =  /usr/local/bin/plugins
+INSTALLS += target
