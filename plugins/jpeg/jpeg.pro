@@ -35,8 +35,6 @@ QMAKE_EXTRA_TARGETS += first copytool
 
 target.path =  /usr/local/bin/plugins
 
-tools.files += tool/facedetect/facedetect\
 
-tools.path =  /usr/local/bin/tool
 
-INSTALLS += target tools
+INSTALLS += target
