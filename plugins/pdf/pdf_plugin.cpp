@@ -6,8 +6,7 @@
 
 #include "pdf_plugin.h"
 
-// Plugin initialization
-// Create properities which can be compared
+/// Plugin initialization, Create properities which can be compared
 void PDF_plugin::Initialize(){
     Attribute *a;
     std::vector<int> ops;
@@ -59,13 +58,13 @@ QString PDF_plugin::GetName()
     return "PDF";
 }
 
-// Supported extensions
+/// Supported extensions
 QStringList PDF_plugin::GetExtensions()
 {
     return AVIABLE_EXTENSIONS;
 }
 
-// Properties supported by this plugin
+/// Properties supported by this plugin
 QStringList PDF_plugin::GetProperties()
 {
     QStringList list;
@@ -78,12 +77,12 @@ QStringList PDF_plugin::GetProperties()
     return list;
 }
 
-// Returns properties which can be used for distribution
+/// Returns properties which can be used for distribution
 QStringList PDF_plugin::GetPropertiesForDistribution(){
     return PROPERTIES_FOR_DISTRIBUTION;
 }
 
-// Returns vector of property operations
+/// Returns vector of property operations
 std::vector<int> PDF_plugin::GetPropertyOperations(QString property){
     for(auto propertyIterator = properties.begin(); propertyIterator != properties.end(); ++propertyIterator){
         if(((*propertyIterator)->GetName())==property)
@@ -92,7 +91,7 @@ std::vector<int> PDF_plugin::GetPropertyOperations(QString property){
     return std::vector<int>();
 }
 
-// Returns type of specific property
+/// Returns type of specific property
 int PDF_plugin::GetPropertyType(QString arg)
 {
     for(auto propertyIterator = properties.begin(); propertyIterator != properties.end(); ++propertyIterator){
@@ -102,7 +101,7 @@ int PDF_plugin::GetPropertyType(QString arg)
     return 0;
 }
 
-// Returns if fileFormat is supported by this plugin
+/// Returns if fileFormat is supported by this plugin
 bool PDF_plugin::IsSupportedFormat(QString fileFormat){
     foreach(QString str,AVIABLE_EXTENSIONS){
         if(str.compare(fileFormat,Qt::CaseInsensitive) == 0)
@@ -111,7 +110,7 @@ bool PDF_plugin::IsSupportedFormat(QString fileFormat){
     return false;
 }
 
-// Returns values for file distribution
+/// Returns values for file distribution
 QString PDF_plugin::GetPropertyValueForDistribution(File *file, QString property){
     if(!PROPERTIES_FOR_DISTRIBUTION.contains(property))
         return "";
@@ -131,7 +130,7 @@ QString PDF_plugin::GetPropertyValueForDistribution(File *file, QString property
     return "";
 }
 
-// Resolver for properties in this plugin
+/// Resolver for properties in this plugin
 bool PDF_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QString property){
     bool returnValue = false;
     // Load PDF document
@@ -170,7 +169,7 @@ bool PDF_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QString
     return returnValue;
 }
 
-// Compare string value
+/// Compare string value
 bool PDF_plugin::IsStringConditionTrue(TreeBranch *branch, QString propertyValue){
     switch(branch->GetOperand()){
         case EQUAL:
@@ -183,7 +182,7 @@ bool PDF_plugin::IsStringConditionTrue(TreeBranch *branch, QString propertyValue
     return false;
 }
 
-// Check if pages count is acceptable
+/// Check if pages count is acceptable
 bool PDF_plugin::IsPagesConditionTrue(TreeBranch *branch, int pages){
     switch(branch->GetOperand()){
         case LESS:
@@ -200,7 +199,7 @@ bool PDF_plugin::IsPagesConditionTrue(TreeBranch *branch, int pages){
     return false;
 }
 
-// Check if PDF document contains some text
+/// Check if PDF document contains some text
 bool PDF_plugin::IsContentConditionTrue(TreeBranch *branch, Poppler::Document* document, bool onlyFirstPage){
     // Pages to search in
     int pagesCount = document->numPages();

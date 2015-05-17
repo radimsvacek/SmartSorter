@@ -13,13 +13,16 @@
 #include "ui_loadrule.h"
 #include "code/control.h"
 
-
-class loadrule : public QDialog, public Ui::loadrule
+/*! \brief Window for loading rule
+ *
+ * Methods that provides data for window where rule can be loaded
+ */
+class LoadRuleWindow : public QDialog, public Ui::loadrule
 {
     Q_OBJECT
     
 public:
-    loadrule(QWidget *parent = 0);
+    LoadRuleWindow(QWidget *parent = 0);
     void Initialize();
 
 private slots:

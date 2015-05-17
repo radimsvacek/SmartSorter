@@ -25,6 +25,10 @@
 
 /****************************/
 // DecTree
+/*! \brief Decision tree class
+ *
+ * Contains root of tree and methods to build, remove and going through tree
+ */
 class DecTree{
 	public:
         DecTree(BasicClassification *);

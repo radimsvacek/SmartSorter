@@ -18,6 +18,10 @@
 
 /****************************/
 // PluginInterface
+/*! \brief Interface for plugins
+ *
+ * Specifies methods that must be implemented in each plugin
+ */
 class PluginInterface
 {
 public:

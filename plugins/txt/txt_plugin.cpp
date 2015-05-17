@@ -6,8 +6,7 @@
 
 #include "txt_plugin.h"
 
-// Plugin initialization
-// Create properities which can be compared
+/// Plugin initialization, Create properities which can be compared
 void TXT_plugin::Initialize(){
     Attribute *a;
     std::vector<int> ops;
@@ -44,19 +43,19 @@ TXT_plugin::~TXT_plugin(){
     properties.clear();
 }
 
-// Returns file format of plugin
+/// Returns file format of plugin
 QString TXT_plugin::GetName()
 {
     return "TXT";
 }
 
-// Returns all possible extensions
+/// Returns all possible extensions
 QStringList TXT_plugin::GetExtensions()
 {
     return AVIABLE_EXTENSIONS;
 }
 
-// Returns all possible properities which can be compared
+/// Returns all possible properities which can be compared
 QStringList TXT_plugin::GetProperties()
 {
     QStringList list;
@@ -69,12 +68,12 @@ QStringList TXT_plugin::GetProperties()
     return list;
 }
 
-// Returns all possible properities which can be used for file distribution
+/// Returns all possible properities which can be used for file distribution
 QStringList TXT_plugin::GetPropertiesForDistribution(){
     return PROPERTIES_FOR_DISTRIBUTION;
 }
 
-// Returns all possible operations which can be done which specific property
+/// Returns all possible operations which can be done which specific property
 std::vector<int> TXT_plugin::GetPropertyOperations(QString property){
     for(auto propertyIterator = properties.begin(); propertyIterator != properties.end(); ++propertyIterator){
         if(((*propertyIterator)->GetName())==property)
@@ -83,7 +82,7 @@ std::vector<int> TXT_plugin::GetPropertyOperations(QString property){
     return std::vector<int>();
 }
 
-// Returns type of specicif property
+/// Returns type of specicif property
 int TXT_plugin::GetPropertyType(QString arg)
 {
     for(auto propertyIterator = properties.begin(); propertyIterator != properties.end(); ++propertyIterator){
@@ -93,7 +92,7 @@ int TXT_plugin::GetPropertyType(QString arg)
     return 0;
 }
 
-// Check if file format is supported by this plugin
+/// Check if file format is supported by this plugin
 bool TXT_plugin::IsSupportedFormat(QString fileFormat){
     foreach(QString str,AVIABLE_EXTENSIONS){
         if(str.compare(fileFormat,Qt::CaseInsensitive) == 0)
@@ -102,7 +101,7 @@ bool TXT_plugin::IsSupportedFormat(QString fileFormat){
     return false;
 }
 
-// Get value of file for distribution
+/// Get value of file for distribution
 QString TXT_plugin::GetPropertyValueForDistribution(File *, QString property){
     if(!PROPERTIES_FOR_DISTRIBUTION.contains(property))
         return "";
@@ -110,7 +109,7 @@ QString TXT_plugin::GetPropertyValueForDistribution(File *, QString property){
     return "Default";
 }
 
-// Check if file fullfill specific condition saved in branch
+/// Check if file fullfill specific condition saved in branch
 bool TXT_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QString property){
 
     if(property == PROPERTY_CONTENT){
@@ -130,7 +129,7 @@ bool TXT_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QString
 
 }
 
-// Comparing content
+/// Comparing content
 bool TXT_plugin::IsContentConditionTrue(TreeBranch * branch, File * file){
     QFile F(file->GetPath());
     if(!F.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -149,7 +148,7 @@ bool TXT_plugin::IsContentConditionTrue(TreeBranch * branch, File * file){
     return false;
 }
 
-// Comparing row in file
+/// Comparing row in file
 bool TXT_plugin::IsRowsConditionTrue(TreeBranch * branch, File * file){
     // Get number of lines in file
     int rows = GetLinesCount(file);
@@ -169,7 +168,7 @@ bool TXT_plugin::IsRowsConditionTrue(TreeBranch * branch, File * file){
     return false;
 }
 
-// Comparing words count in file
+/// Comparing words count in file
 bool TXT_plugin::IsWordsConditionTrue(TreeBranch * branch, File * file){
     int words = GetWordsCount(file);
 
@@ -188,7 +187,7 @@ bool TXT_plugin::IsWordsConditionTrue(TreeBranch * branch, File * file){
     return false;
 }
 
-// Comparing chars count in file
+/// Comparing chars count in file
 bool TXT_plugin::IsCharsConditionTrue(TreeBranch * branch, File * file){
     int chars = GetCharsCount(file);
 
@@ -207,7 +206,7 @@ bool TXT_plugin::IsCharsConditionTrue(TreeBranch * branch, File * file){
     return false;
 }
 
-// Get rows count of file in argument
+/// Get rows count of file in argument
 int TXT_plugin::GetLinesCount(File *file){
     int rows;
     QFile F(file->GetPath());
@@ -222,7 +221,7 @@ int TXT_plugin::GetLinesCount(File *file){
     return rows;
 }
 
-// Get words count of file in argument
+/// Get words count of file in argument
 int TXT_plugin::GetWordsCount(File *file){
 
     QFile F(file->GetPath());
@@ -236,7 +235,7 @@ int TXT_plugin::GetWordsCount(File *file){
     return list.size();
 }
 
-// Get chars count of file in argument
+/// Get chars count of file in argument
 int TXT_plugin::GetCharsCount(File *file){
     QFile F(file->GetPath());
     if(!F.open(QIODevice::ReadOnly | QIODevice::Text))

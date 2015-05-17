@@ -19,6 +19,10 @@
 
 /****************************/
 // Analysis
+/*! \brief Analysis class
+ *
+ * Can analyze source folder and print results
+ */
 class Analysis{
 	public:
 		Analysis();

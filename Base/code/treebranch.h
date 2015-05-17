@@ -17,6 +17,11 @@ class TreeBranch;
 
 /****************************/
 // TreeBranch
+
+/*! \brief Branch of node
+ *
+ * Class represents one branch of node in decision tree
+ */
 class TreeBranch
 {
 public:

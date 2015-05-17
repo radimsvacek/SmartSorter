@@ -21,7 +21,10 @@ class PDF_plugin;
 
 #include "poppler/qt4/poppler-qt4.h"
 
-
+/*! \brief PDF plugin
+ *
+ * Can read content of pdf file, also meta data
+ */
 class PDF_plugin : public QObject, public PluginInterface
 {
     Q_OBJECT

@@ -26,7 +26,7 @@ Control* Control::GetInstance()
 }
 
 
-// Constructor
+/// Constructor
 Control::Control(){
 	// New instance of file lookup engine
     lookUp = new LookUp();
@@ -39,7 +39,7 @@ Control::Control(){
 
 }
 
-// Delete instances of lookup and decision tree
+/// Delete instances of lookup and decision tree
 Control::~Control(){
     delete lookUp;
     delete decisionTree;
@@ -53,7 +53,7 @@ Control::~Control(){
     instanceFlag = false;// SINGLETON
 }
 
-// Run the analysis of source folder
+/// Run the analysis of source folder
 QString Control::DoTheAnalysis(QString folder){
 
     lookUp->SetPath(folder);
@@ -78,9 +78,11 @@ void Control::SetSourcePath(QString path, QString trash){
     trashPath = trash;
 }
 
-// MAIN WORk
-// Preparation to work -> build tree then work and final remove tree
-// in cycle sending files to decision tree, whichc make magic with it
+/*! \brief Main work of app
+ *
+ * Preparation to work -> build tree then work and final remove tree
+ * in cycle sending files to decision tree, whichc make magic with it
+ */
 void Control::Work(QTextBrowser *logsOut){
     // Build decision tree based on user's wish
     decisionTree->BuildTree(rules);
@@ -117,26 +119,24 @@ void Control::Work(QTextBrowser *logsOut){
 
 }
 
-// Call perl script that call FDUPE, which find all duplicate files
-// than delete all of duplicates except one
+/// Call perl script that call FDUPE, which find all duplicate files than delete all of duplicates except one
 void Control::DeleteDuplicateFiles(QTextBrowser *logsOut){
     decisionTree->Initialize(trashPath,logsOut);
     decisionTree->DeleteDuplicityFiles(sourcePath);
 }
 
-// Call perl script that call FDUPE, which find all duplicate files
-// than delete all of duplicates except one
+/// Delete all files in trash folder
 void Control::EmptyTrash(QTextBrowser *logsOut, QStringList files,QString path){
     decisionTree->Initialize(trashPath,logsOut);
     decisionTree->EmptyTrash(files,path);
 }
 
-// Undo operations that was made
+/// Undo operations that was made
 void Control::UndoOperations(){
     decisionTree->UndoOperations();
 }
 
-// Methods for GUI
+/***/// Methods for GUI
 QStringList Control::GetLoadedPlugins(){
     return classify->GetLoadedPlugins();
 }

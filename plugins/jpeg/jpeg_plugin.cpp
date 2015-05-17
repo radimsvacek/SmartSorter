@@ -6,8 +6,7 @@
 
 #include "jpeg_plugin.h"
 
-// Plugin initialization
-// Create properities which can be compared
+/// Plugin initialization, Create properities which can be compared
 void JPEG_plugin::Initialize(){
     Attribute *a;
     std::vector<int> ops;
@@ -71,13 +70,13 @@ QString JPEG_plugin::GetName()
     return "JPG";
 }
 
-// Supported extensions
+/// Supported extensions
 QStringList JPEG_plugin::GetExtensions()
 {
     return AVIABLE_EXTENSIONS;
 }
 
-// Properties supported by this plugin
+/// Properties supported by this plugin
 QStringList JPEG_plugin::GetProperties()
 {
     QStringList list;
@@ -90,12 +89,12 @@ QStringList JPEG_plugin::GetProperties()
     return list;
 }
 
-// Returns properties which can be used for distribution
+/// Returns properties which can be used for distribution
 QStringList JPEG_plugin::GetPropertiesForDistribution(){
     return PROPERTIES_FOR_DISTRIBUTION;
 }
 
-// Returns vector of property operations
+/// Returns vector of property operations
 std::vector<int> JPEG_plugin::GetPropertyOperations(QString property){
     for(auto propertyIterator = Properties.begin(); propertyIterator != Properties.end(); ++propertyIterator){
         if(((*propertyIterator)->GetName())==property)
@@ -104,7 +103,7 @@ std::vector<int> JPEG_plugin::GetPropertyOperations(QString property){
     return std::vector<int>();
 }
 
-// Returns type of specific property
+/// Returns type of specific property
 int JPEG_plugin::GetPropertyType(QString arg)
 {
     for(auto propertyIterator = Properties.begin(); propertyIterator != Properties.end(); ++propertyIterator){
@@ -114,7 +113,7 @@ int JPEG_plugin::GetPropertyType(QString arg)
     return 0;
 }
 
-// Returns if fileFormat is supported by this plugin
+/// Returns if fileFormat is supported by this plugin
 bool JPEG_plugin::IsSupportedFormat(QString fileFormat){
     foreach(QString str,AVIABLE_EXTENSIONS){
         if(str.compare(fileFormat,Qt::CaseInsensitive) == 0)
@@ -123,7 +122,7 @@ bool JPEG_plugin::IsSupportedFormat(QString fileFormat){
     return false;
 }
 
-// Returns string containting value for distriribution .. specific information about file
+/// Returns string containting value for distriribution .. specific information about file
 QString JPEG_plugin::GetPropertyValueForDistribution(File *file, QString property){
     if(!PROPERTIES_FOR_DISTRIBUTION.contains(property))
         return "";
@@ -165,7 +164,7 @@ QString JPEG_plugin::GetPropertyValueForDistribution(File *file, QString propert
     return "Default";
 }
 
-// Resolver for properties in this plugin
+/// Resolver for properties in this plugin
 bool JPEG_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QString property){
     // Choose right property to compare and call its method
     if((property == PROPERTY_RESOLUTION) || (property == PROPERTY_WIDTH) || (property == PROPERTY_HEIGHT)){
@@ -184,7 +183,7 @@ bool JPEG_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QStrin
     return false;
 }
 
-// Check & compare image size and resolution
+/// Check & compare image size and resolution
 bool JPEG_plugin::IsSizeConditionTrue(TreeBranch *branch, File *file, QString property){
     // Load image
     QImage *maap = new QImage(file->GetPath());
@@ -218,7 +217,7 @@ bool JPEG_plugin::IsSizeConditionTrue(TreeBranch *branch, File *file, QString pr
     return false;
 }
 
-// Returns date when was picture taken
+/// Returns date when was picture taken
 QDate JPEG_plugin::GetTakenDate(File *file){
     // Open file
     ExifData *exifData = exif_data_new_from_file(file->GetPath().toStdString().c_str());
@@ -236,7 +235,7 @@ QDate JPEG_plugin::GetTakenDate(File *file){
 
 }
 
-// Returns complete name of camera which take the picture
+/// Returns complete name of camera which take the picture
 QString JPEG_plugin::GetCamera(File *file){
     // Open file
     ExifData *exifData = exif_data_new_from_file(file->GetPath().toStdString().c_str());
@@ -262,7 +261,7 @@ QString JPEG_plugin::GetCamera(File *file){
 
 }
 
-// Check for some EXIF properties
+/// Check for some EXIF properties
 bool JPEG_plugin::IsExifConditionTrue(TreeBranch *branch, File *file, QString property){
 
     // If taken date saved in EXIF metadata is wanted to compare
@@ -302,7 +301,7 @@ bool JPEG_plugin::IsExifConditionTrue(TreeBranch *branch, File *file, QString pr
     return false;
 }
 
-// Check if image contains face
+/// Check if image contains face
 bool JPEG_plugin::IsFaceConditionTrue(int faceIn, File *file){
     // Face in picture
     QProcess *faceDetect = new QProcess;

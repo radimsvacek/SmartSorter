@@ -7,7 +7,7 @@
 #include "newdistribution.h"
 
 
-newdistribution::newdistribution(QWidget *parent) :
+NewDistributionWindow::NewDistributionWindow(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
@@ -28,17 +28,17 @@ newdistribution::newdistribution(QWidget *parent) :
 }
 
 
-void newdistribution::on_clearButton_clicked()
+void NewDistributionWindow::on_clearButton_clicked()
 {
     distribution->clear();
     LoadProperties(fileFormat);
 }
 
-void newdistribution::SetResultString(QString *result){
+void NewDistributionWindow::SetResultString(QString *result){
     resultStr=result;
 }
 
-void newdistribution::LoadProperties(QString format){
+void NewDistributionWindow::LoadProperties(QString format){
     fileFormat = format;
     QStringList properites = controller->GetPropertiesForDistribution(format);
     int row;
@@ -55,11 +55,11 @@ void newdistribution::LoadProperties(QString format){
     }
 }
 
-void newdistribution::Initialize(){
+void NewDistributionWindow::Initialize(){
     controller=Control::GetInstance();
 }
 
-void newdistribution::on_buttonBox_accepted()
+void NewDistributionWindow::on_buttonBox_accepted()
 {
     if(distribution->text() != ""){
         *resultStr = distribution->text();
@@ -69,14 +69,14 @@ void newdistribution::on_buttonBox_accepted()
 }
 
 // Cancel
-void newdistribution::on_buttonBox_rejected()
+void NewDistributionWindow::on_buttonBox_rejected()
 {
     this->close();
 }
 
 
-// Make some changes on table because of new order of rules or delete rule
-void newdistribution::AttributeClicked(int row, int col){
+/// Make some changes on table because of new order of rules or delete rule
+void NewDistributionWindow::AttributeClicked(int row, int col){
     QTableWidgetItem *qi =  aviableAttributes->item(row,col);
     QString property = qi->text();
     if(distribution->text() != "")

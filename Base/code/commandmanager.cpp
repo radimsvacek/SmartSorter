@@ -10,7 +10,7 @@ CommandManager::CommandManager()
 {
 }
 
-// Just in case of not cleaned vector
+/// Just in case of not cleaned vector
 CommandManager::~CommandManager(){
     for(auto commandsIterator = commands.begin(); commandsIterator != commands.end(); ++commandsIterator) {
         delete (*commandsIterator);
@@ -18,14 +18,14 @@ CommandManager::~CommandManager(){
     commands.clear();
 }
 
-// Execute commands and save it
+/// Execute commands and save it
 void CommandManager::ExecuteCommand(Command *command){
     commands.push_back(command);
     command->Execute();
 
 }
 
-// Clean memory
+/// Clean memory
 void CommandManager::ClearCommands(){
     for(auto commandsIterator = commands.begin(); commandsIterator != commands.end(); ++commandsIterator) {
         delete (*commandsIterator);
@@ -33,7 +33,7 @@ void CommandManager::ClearCommands(){
     commands.clear();
 }
 
-// Undo all saved commands in for cycle
+/// Undo all saved commands in for cycle
 void CommandManager::UndoCommands(){
     int counter = 0;
 

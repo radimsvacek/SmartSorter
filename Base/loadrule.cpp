@@ -7,7 +7,7 @@
 #include "loadrule.h"
 #include "ui_loadrule.h"
 
-loadrule::loadrule(QWidget * parent) : QDialog(parent)
+LoadRuleWindow::LoadRuleWindow(QWidget * parent) : QDialog(parent)
 {
     setupUi(this);
     setWindowTitle("Load rule");
@@ -23,12 +23,12 @@ loadrule::loadrule(QWidget * parent) : QDialog(parent)
 
 }
 
-void loadrule::Initialize(){
+void LoadRuleWindow::Initialize(){
     C=Control::GetInstance();
     fileSelected=false;
 }
 
-void loadrule::on_buttonBox_accepted()
+void LoadRuleWindow::on_buttonBox_accepted()
 {
     if(fileSelected){
         Rule * rule = new Rule();
@@ -54,13 +54,13 @@ void loadrule::on_buttonBox_accepted()
     }
 }
 
-void loadrule::on_buttonBox_rejected()
+void LoadRuleWindow::on_buttonBox_rejected()
 {
     this->close();
 }
 
 
-void loadrule::on_pushButton_clicked()
+void LoadRuleWindow::on_pushButton_clicked()
 {
     contentOfXML = QFileDialog::getOpenFileName(this, tr("Select XML file with rule"),"", tr("XML files (*.xml)"));
     if(contentOfXML != ""){
@@ -69,8 +69,8 @@ void loadrule::on_pushButton_clicked()
     }
 }
 
-// Click on line edit with path to destination folder
-bool loadrule::eventFilter(QObject *, QEvent *event)
+/// Click on line edit with path to destination folder
+bool LoadRuleWindow::eventFilter(QObject *, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonPress){
         on_pushButton_clicked();

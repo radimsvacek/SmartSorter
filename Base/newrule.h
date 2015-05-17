@@ -18,11 +18,15 @@
 #include "code/rule.h"
 #include "newdistribution.h"
 
-class NewRule : public QDialog, public Ui::Dialog
+/*! \brief Window to create new rule
+ *
+ * Methods that provides data for window where new rule can be created
+ */
+class NewRuleWindow : public QDialog, public Ui::Dialog
 {
     Q_OBJECT
 public:
-    NewRule(QWidget *parent = 0);
+    NewRuleWindow(QWidget *parent = 0);
     void Initialize();
     bool Confirm();
 

@@ -22,6 +22,10 @@
 
 #define MEGA 1000000
 
+/*! \brief JPEG plugin
+ *
+ * Can return info about face in picture, resolution of image, exif data etc
+ */
 class JPEG_plugin : public QObject, public PluginInterface
 {
     Q_OBJECT

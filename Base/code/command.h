@@ -16,6 +16,10 @@
 
 /****************************/
 // Command
+/*! \brief Virtual class
+ *
+ * Specifies what must be implemented in child classes
+ */
 class Command
 {
 public:
@@ -31,18 +35,30 @@ public:
     QTextBrowser * logsOut;
 };
 
+/*! \brief Move operation
+ *
+ * Move file to new destination
+ */
 class MoveCommand : public Command{
 public:
     void Execute();
     void Undo();
 };
 
+/*! \brief Copy operation
+ *
+ * Copy file to destination
+ */
 class CopyCommand : public Command{
 public:
     void Execute();
     void Undo();
 };
 
+/*! \brief Remove operation
+ *
+ * Move file to trash folder
+ */
 class DeleteCommand : public Command{
 public:
     void Execute();

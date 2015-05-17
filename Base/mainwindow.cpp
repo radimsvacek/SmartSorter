@@ -9,7 +9,7 @@
 
 
 
-// Constructor of main window
+/// Constructor of main window
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), userInterface(new Ui::MainWindow)
 {
     userInterface->setupUi(this);
@@ -21,8 +21,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), userInterface(new
 
 }
 
-// Destructor of main window
-// clean all used memory
+/// Destructor of main window, clean all used memory
 MainWindow::~MainWindow()
 {
     delete userInterface;
@@ -30,7 +29,7 @@ MainWindow::~MainWindow()
     delete loading;
 }
 
-// Print title, app status and loaded plugins
+/// Print title, app status and loaded plugins
 void MainWindow::PrintInfo(){
     this->setWindowTitle("Smart sorter");
     QStringList plugins = controller->GetLoadedPlugins();
@@ -49,7 +48,7 @@ void MainWindow::PrintInfo(){
     }
 }
 
-// Initialize all variables to start values
+/// Initialize all variables to start values
 void MainWindow::InitializeVariables(){
     folderSelected=false;
     trashSelected=false;
@@ -61,7 +60,7 @@ void MainWindow::InitializeVariables(){
     freeze=false;
 }
 
-// Initialize rules view -> load headers and resize, connect to click event
+/// Initialize rules view -> load headers and resize, connect to click event
 void MainWindow::InitializeRulesView(){
     QStringList lab;
     lab << "  Name  " << "  Format  " << " Action " << "   Destination  " << QString::fromUtf8("\u25B2") << QString::fromUtf8("\u25bc") << "X ";
@@ -71,8 +70,7 @@ void MainWindow::InitializeRulesView(){
     connect(userInterface->rules_view,SIGNAL(cellClicked(int,int)),this,SLOT(RulesClicked(int,int)));
 }
 
-// Set color scheme of application
-// will be used for every window and msg box
+/// Set color scheme of application, will be used for every window and msg box
 void MainWindow::SetColorScheme(){
     QPalette p(this->palette());/*
     p.setColor(QPalette::Window, QColor::fromRgb(46,38,51));
@@ -92,7 +90,7 @@ void MainWindow::SetColorScheme(){
     this->setPalette(p);
 }
 
-// Button click for browse and select source folder
+/// Button click for browse and select source folder
 void MainWindow::on_select_button_clicked()
 {
     if(freeze)
@@ -108,7 +106,7 @@ void MainWindow::on_select_button_clicked()
     }
 }
 
-// Check if work can be started
+/// Check if work can be started
 int MainWindow::WorkCanStart(bool RulesCreated,bool DeleteDuplicity){
     // Source folder was not selected
     if(!folderSelected)
@@ -137,7 +135,7 @@ void MainWindow::WorkDone(bool DeleteRules){
     userInterface->undo_button->show();
 }
 
-// Function handles click on start button
+/// Function handles click on start button
 void MainWindow::on_start_button_clicked()
 {
     int retValue = WorkCanStart(controller->RulesCount()>0, userInterface->delete_duplicate->isChecked());
@@ -180,12 +178,11 @@ void MainWindow::on_start_button_clicked()
     }
 }
 
-// New rule button click
-// Its necessary to save and display new rule
+/// New rule button click, Its necessary to save and display new rule
 void MainWindow::on_new_rule_button_clicked()
 {
-    NewRule *dialog;
-    dialog = new NewRule(this);
+    NewRuleWindow *dialog;
+    dialog = new NewRuleWindow(this);
     dialog->Initialize();
     dialog->exec();
 
@@ -195,11 +192,11 @@ void MainWindow::on_new_rule_button_clicked()
 }
 
 
-// User may load rule from saved xml file through this button
+/// User may load rule from saved xml file through this button
 void MainWindow::on_load_rule_button_clicked()
 {
-    loadrule *loadrule_dialog;
-    loadrule_dialog = new loadrule(this);
+    LoadRuleWindow *loadrule_dialog;
+    loadrule_dialog = new LoadRuleWindow(this);
     loadrule_dialog->Initialize();
     loadrule_dialog->exec();
 
@@ -212,7 +209,7 @@ void MainWindow::on_load_rule_button_clicked()
 
 
 
-// Analyze selected source folder
+/// Analyze selected source folder
 void MainWindow::on_analyze_clicked()
 {
     if(folderSelected){
@@ -235,7 +232,7 @@ void MainWindow::on_analyze_clicked()
     }
 }
 
-// Exit program
+/// Exit program
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     QMessageBox msgBox;
@@ -252,7 +249,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         event->ignore();
 }
 
-// Catch click on table with rules
+/// Catch click on table with rules
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonPress){
@@ -265,7 +262,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     return false;
 }
 
-// Make some changes on table because of new order of rules or delete rule
+/// Make some changes on table because of new order of rules or delete rule
 void MainWindow::RulesClicked(int row, int col){
     if(col == DELETE_BUTTON)
     {
@@ -285,7 +282,7 @@ void MainWindow::RulesClicked(int row, int col){
 
 }
 
-// Print rules in main window in new order
+/// Print rules in main window in new order
 void MainWindow::RePrintRules(){
     userInterface->rules_view->clear();
     while (userInterface->rules_view->rowCount() > 0)
@@ -342,7 +339,7 @@ void MainWindow::RePrintRules(){
     }
 }
 
-// Undo current operation
+/// Undo current operation
 void MainWindow::on_undo_button_clicked(){
     FreezeGui();
     controller->UndoOperations();
@@ -350,13 +347,13 @@ void MainWindow::on_undo_button_clicked(){
     userInterface->undo_button->hide();
 }
 
-// Clear all created rules
+/// Clear all created rules
 void MainWindow::on_clear_button_clicked(){
     controller->DeleteAllRules();
     RePrintRules();
 }
 
-// Enabled false -> to every buttons etc while doing job
+/// Enabled false -> to every buttons etc while doing job
 void MainWindow::FreezeGui(){
     freeze=true;
     userInterface->trash->setEnabled(false);
@@ -384,7 +381,7 @@ void MainWindow::FreezeGui(){
 
 }
 
-// Job is done, set everything enabled true
+/// Job is done, set everything enabled true
 void MainWindow::UnFreezeGui(){
     freeze=false;
     userInterface->trash->setEnabled(true);
@@ -406,7 +403,7 @@ void MainWindow::UnFreezeGui(){
     userInterface->statusBar->showMessage("Ready");
 }
 
-// Clicked on empty button -> delete all files in trash
+/// Clicked on empty button -> delete all files in trash
 void MainWindow::on_empty_trash_clicked()
 {
     if(userInterface->trash->text() == ""){
@@ -435,7 +432,7 @@ void MainWindow::on_empty_trash_clicked()
     }
 }
 
-// Folder select dialog for trash folder
+/// Folder select dialog for trash folder
 void MainWindow::on_select_trash_clicked()
 {
     if(freeze)

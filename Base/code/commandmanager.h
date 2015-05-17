@@ -17,6 +17,10 @@
 
 /****************************/
 // CommandManager
+/*! \brief Manage the commands
+ *
+ * Contains vector of done commands and undo method
+ */
 class CommandManager
 {
 private:

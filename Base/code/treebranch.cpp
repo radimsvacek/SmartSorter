@@ -13,9 +13,11 @@ TreeBranch::TreeBranch()
     walkThroughNode=false;
 }
 
+
 QString TreeBranch::GetStringValue(){
     return stringValue;
 }
+
 
 QDate TreeBranch::GetDateValue(){
     return dateValue;

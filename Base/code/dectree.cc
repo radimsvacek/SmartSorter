@@ -21,8 +21,7 @@ void DecTree::Initialize(QString path, QTextBrowser * logs){
     logsOut=logs;
 }
 
-// File goes through decision tree
-// Execute proper operation with file
+/// File goes through decision tree, execute proper operation with file
 void DecTree::DoTheMagic(File *file){
     // Some variables that is needed in method
     QString fileFormat = file->GetExtension();
@@ -56,13 +55,13 @@ void DecTree::DoTheMagic(File *file){
     delete file;
 }
 
-// Goes through all branches of root and find these which is able to specific file format
+/// Goes through all branches of root and find these which is able to specific file format
 std::vector<Node *> DecTree::FindSubTrees(QString format){
     QString generalFormat = classify->GetGeneralFileFormat(format);
     return root->GetSubTreesByFile(format,generalFormat);
 }
 
-// Method for finding best result in tree
+/// Method for finding best result in tree
 Operation * DecTree::FindBestResult(File *file, Node *subRoot){
 
     // Some variables needed
@@ -97,7 +96,7 @@ Operation * DecTree::FindBestResult(File *file, Node *subRoot){
     return bestResult;
 }
 
-// Do action with file based on operation founded in decision tree
+/// Do action with file based on operation founded in decision tree
 void DecTree::DoTheActionWithFile(File *file,Operation *op){
 
     // Get exact distribution folder
@@ -132,13 +131,13 @@ void DecTree::DoTheActionWithFile(File *file,Operation *op){
     return;
 }
 
-// Undo all operations that was made
+/// Undo all operations that was made
 void DecTree::UndoOperations(){
     commandManager->UndoCommands();
     commandManager->ClearCommands();
 }
 
-// Method for building tree from rules vector
+/// Method for building tree from rules vector
 void DecTree::BuildTree(std::vector<Rule *> rules){
     // Clear command in case of previous work
     commandManager->ClearCommands();
@@ -273,7 +272,7 @@ void DecTree::BuildTree(std::vector<Rule *> rules){
 }
 
 
-// Create and return child node, create new branch from parent node to newly created child node
+/// Create and return child node, create new branch from parent node to newly created child node
 Node * DecTree::CreateBranchAndNode(Node * Parent,Condition *condition){
     Node * nextNextNode = new Node();
     nextNextNode->SetParent(Parent);
@@ -296,18 +295,18 @@ Node * DecTree::CreateBranchAndNode(Node * Parent,Condition *condition){
     return nextNextNode;
 }
 
-// Recursively delete rest of tree
+/// Recursively delete rest of tree
 void DecTree::RemoveTree(){
     // Root->PrintTree();
     root->DeleteTree();
 }
 
-// Check if script for duplicity really exists
+/// Check if script for duplicity really exists
 bool DecTree::IsDuplicityScriptExists(){
     return (QFile(duplicityScriptPath).exists() || QFile(duplicityScriptPath2).exists());
 }
 
-// Delete all duplicity files exclude one
+/// Delete all duplicity files exclude one
 void DecTree::DeleteDuplicityFiles(QString path){
     QString scriptPath;
 
@@ -359,7 +358,7 @@ void DecTree::DeleteDuplicityFiles(QString path){
 }
 
 
-// Delete all files in trash
+/// Delete all files in trash
 void DecTree::EmptyTrash(QStringList files, QString path){
     int counter = 0;
     foreach(QString str,files){

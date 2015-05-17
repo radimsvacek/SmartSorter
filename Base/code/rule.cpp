@@ -19,6 +19,7 @@ Rule::~Rule()
     conds.clear();
 }
 
+/// Save rule into XML file
 int Rule::SaveRule(){
 
     QFile file(name+".xml");
@@ -72,7 +73,7 @@ int Rule::SaveRule(){
 
 }
 
-// Load rule from XML file
+/// Load rule from XML file
 int Rule::LoadRule(QString nameRule){
     QDomDocument doc(nameRule);
     QFile file(nameRule);
@@ -199,7 +200,7 @@ int Rule::LoadRule(QString nameRule){
     return RULE_LOADED;
 }
 
-// Check if created rule is valid
+/// Check if created rule is valid
 bool Rule::IsRuleValid(){
     // initialize
     Control *controller = Control::GetInstance();
@@ -272,7 +273,7 @@ bool Rule::IsRuleValid(){
     return true;
 }
 
-// Create new condition
+/// Create new condition
 Condition * Rule::SetCond(int op,QString prop,int tp){
     Condition *condition = new Condition();
     condition->operand=op;
@@ -332,7 +333,7 @@ QString Rule::GetDistribution(){
     return distribution;
 }
 
-// Return next condition in rule, also remove it from vector
+/// Return next condition in rule, also remove it from vector
 Condition * Rule::GetNextCondition(){
     if(conds.size() > 0){
         Condition *c = conds.back();
@@ -348,7 +349,7 @@ int Rule::GetConditionsCount(){
     return conds.size();
 }
 
-// Finding condition in vector with specific attribute to compare
+/// Finding condition in vector with specific attribute to compare
 Condition * Rule::GetSpecificCondition(QString attribute){
     Condition *conditionToReturn = NULL;
 

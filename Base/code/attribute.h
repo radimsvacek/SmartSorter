@@ -12,6 +12,10 @@
 
 #define NO_OPERATOR 0
 
+/*! \brief Possible operators
+ *
+ * Less, equal etc
+ */
 enum Operators{
     LESS=1,
     LESS_EQUAL,
@@ -23,6 +27,10 @@ enum Operators{
     IS_TRUE
 };
 
+/*! \brief Type of value
+ *
+ * Value inserted by user
+ */
 enum Atr_types{
     DATE_TYPE = 1,
     TEXT_TYPE,
@@ -33,6 +41,10 @@ enum Atr_types{
 
 /****************************/
 // Attribute
+/*! \brief Stands for one file property
+ *
+ * Attribute represent possible property that can be used for classification
+ */
 class Attribute
 {
 public:

@@ -7,8 +7,8 @@
 #include "newrule.h"
 
 
-// Cnstructor .. only some stuff
-NewRule::NewRule(QWidget * parent) : QDialog(parent)
+/// Cnstructor .. only some stuff, setting colors
+NewRuleWindow::NewRuleWindow(QWidget * parent) : QDialog(parent)
 {
     setupUi(this);
     setWindowTitle("New rule");
@@ -28,9 +28,8 @@ NewRule::NewRule(QWidget * parent) : QDialog(parent)
     this->setPalette(p);
 }
 
-// Load pointer to control object
-// Also preparation of dialog
-void NewRule::Initialize(){
+/// Load pointer to control object, Also preparation of dialog
+void NewRuleWindow::Initialize(){
 
     inserted_value->show();
     inserted_date->hide();
@@ -55,8 +54,8 @@ void NewRule::Initialize(){
     cond_table->setColumnWidth(3,10);
 }
 
-// Select property to compare
-void NewRule::on_property_select_currentIndexChanged(const QString &arg1)
+/// Select property to compare
+void NewRuleWindow::on_property_select_currentIndexChanged(const QString &arg1)
 {
     // Clear operation select box & value box
     operation_select->clear();
@@ -130,7 +129,7 @@ void NewRule::on_property_select_currentIndexChanged(const QString &arg1)
 }
 
 
-void NewRule::on_fileformat_select_currentIndexChanged(const QString &arg1){    
+void NewRuleWindow::on_fileformat_select_currentIndexChanged(const QString &arg1){    
     // Input for value of condition
     inserted_value->show();
     inserted_date->hide();
@@ -154,14 +153,14 @@ void NewRule::on_fileformat_select_currentIndexChanged(const QString &arg1){
     property_select->addItems(controller->GetProperties(arg1));
 }
 
-// delete created condition
-void NewRule::CondsClicked(int row,int cell){
+/// delete created condition
+void NewRuleWindow::CondsClicked(int row,int cell){
     if(cell==3)
         cond_table->removeRow(row);
 }
 
-// Select destination folder
-void NewRule::on_destination_browse_clicked(){
+/// Select destination folder
+void NewRuleWindow::on_destination_browse_clicked(){
     QString dir = QFileDialog::getExistingDirectory(this, tr("Select source folder"),
                                                     "",
                                                     QFileDialog::ShowDirsOnly
@@ -172,8 +171,8 @@ void NewRule::on_destination_browse_clicked(){
     }
 }
 
-// Save this rule to xml file with saved rules
-void NewRule::on_saveButton_clicked()
+/// Save this rule to xml file with saved rules
+void NewRuleWindow::on_saveButton_clicked()
 {
     if(Confirm()){
         QString dir = QFileDialog::getExistingDirectory(this, tr("Select source to save rule"),
@@ -214,8 +213,8 @@ void NewRule::on_saveButton_clicked()
     }
 }
 
-// Add new rule -> create it in mainwindow
-void NewRule::on_addButton_clicked()
+/// Add new rule -> create it in mainwindow
+void NewRuleWindow::on_addButton_clicked()
 {
     if(Confirm()){
         Rule *CreatedRule = CreateRule();
@@ -224,8 +223,8 @@ void NewRule::on_addButton_clicked()
     }
 }
 
-// Create rule and return reference to it
-Rule* NewRule::CreateRule(){
+/// Create rule and return reference to it
+Rule* NewRuleWindow::CreateRule(){
     int type;
     int operand=0;
     QString op;
@@ -296,13 +295,13 @@ Rule* NewRule::CreateRule(){
     return CreatedRule;
 }
 
-// Cancel adding new rule
-void NewRule::on_cancelButton_clicked(){
+/// Cancel adding new rule
+void NewRuleWindow::on_cancelButton_clicked(){
     this->close();
 }
 
-// Add new condition
-void NewRule::on_add_one_clicked()
+/// Add new condition
+void NewRuleWindow::on_add_one_clicked()
 {
     // Check if is everything nessecary is filled
     if(operation_select->currentIndex()!=0
@@ -368,8 +367,8 @@ void NewRule::on_add_one_clicked()
     }
 }
 
-// Click on line edit with path to destination folder
-bool NewRule::eventFilter(QObject *, QEvent *event)
+/// Click on line edit with path to destination folder
+bool NewRuleWindow::eventFilter(QObject *, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonPress){
         on_destination_browse_clicked();
@@ -377,8 +376,8 @@ bool NewRule::eventFilter(QObject *, QEvent *event)
     return false;
 }
 
-// Check if everything necessary is filled
-bool NewRule::Confirm(){
+/// Check if everything necessary is filled
+bool NewRuleWindow::Confirm(){
     bool retValue = true;
 
 
@@ -407,8 +406,8 @@ bool NewRule::Confirm(){
 }
 
 
-// Enable edit destination, if delete operation is selected
-void NewRule::on_operation_with_file_currentIndexChanged(const QString &arg1)
+/// Enable edit destination, if delete operation is selected
+void NewRuleWindow::on_operation_with_file_currentIndexChanged(const QString &arg1)
 {
     if(arg1=="Delete"){
         tabWidget->setTabEnabled(2,false);
@@ -418,14 +417,14 @@ void NewRule::on_operation_with_file_currentIndexChanged(const QString &arg1)
     }
 }
 
-// Create distribution path for files based on their properities
-void NewRule::on_distribution_button_clicked()
+/// Create distribution path for files based on their properities
+void NewRuleWindow::on_distribution_button_clicked()
 {
     QString res = QString();
     QString *result = &res;
-    newdistribution *distr_dialog;
+    NewDistributionWindow *distr_dialog;
 
-    distr_dialog = new newdistribution(this);
+    distr_dialog = new NewDistributionWindow(this);
     distr_dialog->SetResultString(result);
     distr_dialog->Initialize();
     distr_dialog->LoadProperties(fileformat_select->currentText());

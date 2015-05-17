@@ -20,7 +20,10 @@
 #include "code/file.h"
 #include "code/treebranch.h"
 
-
+/*! \brief HTML plugin
+ *
+ * Can get info about meta in header, title, etc
+ */
 class HTML_plugin : public QObject, public PluginInterface
 {
     Q_OBJECT

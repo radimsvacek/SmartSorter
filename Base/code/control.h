@@ -27,6 +27,10 @@
 
 /****************************/
 // Control
+/*! \brief Main class of app
+ *
+ * Cornerstone of application, communicate with GUI and provides services of backend
+ */
 class Control{
 	public:
         static Control* GetInstance();

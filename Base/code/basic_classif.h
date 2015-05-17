@@ -21,6 +21,10 @@
 
 /****************************/
 // BasicClassification
+/*! \brief Class for basic classification of files
+ *
+ * Can classify file by name, extension, date and size, cares about plugins
+ */
 class BasicClassification
 {
 public:

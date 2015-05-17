@@ -12,12 +12,16 @@
 #include "ui_newdistribution.h"
 #include "code/control.h"
 
-class newdistribution : public QDialog, public Ui::newdistribution
+/*! \brief New distribution window
+ *
+ * Methods that provides data for window where distribution can be selected
+ */
+class NewDistributionWindow : public QDialog, public Ui::newdistribution
 {
     Q_OBJECT
     
 public:
-    newdistribution(QWidget *parent = 0);
+    NewDistributionWindow(QWidget *parent = 0);
     void SetResultString(QString *);
     void LoadProperties(QString);
     void Initialize();

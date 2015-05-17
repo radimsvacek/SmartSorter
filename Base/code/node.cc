@@ -19,7 +19,7 @@ void Node::SetParent(Node *P){
 	parentNode=P;
 }
 
-// Delete all tree recursively
+/// Delete all tree recursively
 void Node::DeleteTree(){
     for(auto branchesIterator = branches.begin(); branchesIterator != branches.end();){
         (*branchesIterator)->GetChild()->DeleteTree();
@@ -31,7 +31,7 @@ void Node::DeleteTree(){
 }
 
 
-// Printing tree -> for DEBUG
+/// Printing tree -> for DEBUG
 void Node::PrintTree(){
     qDebug() << stuffToCompare << "!! Kids from this !!";
     if(operationInNode != NULL)
@@ -82,7 +82,7 @@ void Node::SetAttributeToCompare(QString attribute){
     stuffToCompare=attribute;
 }
 
-// Found file format root node from basic root node
+/// Found file format root node from basic root node
 Node * Node::GetFileFormatNode(QString Format){
     for(auto branchesIterator = branches.begin(); branchesIterator != branches.end(); ++branchesIterator){
         if((*branchesIterator)->GetStringValue() == Format)
@@ -92,7 +92,7 @@ Node * Node::GetFileFormatNode(QString Format){
 }
 
 
-// Return vector of subtrees representing possible subtrees of current file format
+/// Return vector of subtrees representing possible subtrees of current file format
 std::vector<Node *> Node::GetSubTreesByFile(QString format, QString generalFormat){
     std::vector<Node *> subTrees;
 
@@ -116,7 +116,7 @@ std::vector<Node *> Node::GetSubTreesByFile(QString format, QString generalForma
     return subTrees;
 }
 
-// Creating new branch -> value to compare is string
+/// Creating new branch -> value to compare is string
 void Node::SetNewBranch(Node *child,QString value,int oper){
     TreeBranch *newBranch = new TreeBranch();
     newBranch->SetChild(child);
@@ -125,7 +125,7 @@ void Node::SetNewBranch(Node *child,QString value,int oper){
     branches.push_back(newBranch);
 }
 
-// Creating new branch -> value to compare is date
+/// Creating new branch -> value to compare is date
 void Node::SetNewBranch(Node *child,QDate value,int oper){
     TreeBranch *newBranch = new TreeBranch();
     newBranch->SetChild(child);
@@ -134,7 +134,7 @@ void Node::SetNewBranch(Node *child,QDate value,int oper){
     branches.push_back(newBranch);
 }
 
-// Creating new branch -> value to compare is number
+/// Creating new branch -> value to compare is number
 void Node::SetNewBranch(Node *child,int value,int oper){
     TreeBranch *newBranch = new TreeBranch();
     newBranch->SetChild(child);
@@ -143,7 +143,7 @@ void Node::SetNewBranch(Node *child,int value,int oper){
     branches.push_back(newBranch);
 }
 
-// Creating new branch -> it will be walk through branch
+/// Creating new branch -> it will be walk through branch
 void Node::SetNewBranch(Node *child){
     TreeBranch *newBranch = new TreeBranch();
     newBranch->SetChild(child);
@@ -171,7 +171,7 @@ QString Node::GetComparingAttribute(){
     return stuffToCompare;
 }
 
-// Method for find branch with exactly same condition
+/// Method for find branch with exactly same condition
 Node * Node::GetBranchNodeWithSameCond(Condition *condition){
     Node *nodeToReturn = NULL;
 
@@ -210,7 +210,7 @@ Node * Node::GetBranchNodeWithSameCond(Condition *condition){
     return nodeToReturn;
 }
 
-// Method to find walk through node with same property to compare
+/// Method to find walk through node with same property to compare
 Node * Node::GetWalkThroughBranchNode(QString attr){
     for(auto branchesIterator = branches.begin(); branchesIterator != branches.end(); ++branchesIterator){
         if((*branchesIterator)->IsWalkThrough()){
@@ -222,7 +222,7 @@ Node * Node::GetWalkThroughBranchNode(QString attr){
     return NULL;
 }
 
-// Getting branch at specific postiion
+/// Getting branch at specific postiion
 TreeBranch * Node::GetBranchAtPosition(int i){
     return branches.at(i);
 }

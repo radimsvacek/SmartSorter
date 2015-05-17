@@ -22,6 +22,10 @@ using namespace std;
 
 /****************************/
 // Node
+/*! \brief Represents one node in tree
+ *
+ * This class stands for one node in decision tree, contains vector of branches and property of file to compare
+ */
 class Node{
 	public:
 		Node();

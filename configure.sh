@@ -4,9 +4,9 @@ printf "Script checks if everything needed for SmartSorter is installed!\n\n"
 
 LIBS_OK=true
 
-libs=( "libexif" "poppler" )
+libs=( "libexif.so.12" "libpoppler.so.19" "libpoppler-qt4.so.3" )
 
-Qt=( "QtCore" "QtGui" "QtWebKit" "QtXml")
+Qt=( "libQtCore.so.4" "libQtGui.so.4" "libQtWebKit.so.4" "libQtXml.so.4")
 
 for i in "${libs[@]}" 
 do

@@ -25,6 +25,10 @@ class Rule;
 #define FILE_ERROR 1
 #define XML_ERROR 2
 
+/*! \brief Actions enumeration
+ *
+ * Possible actions with file
+ */
 enum actions{
     MOVE=1,
     COPY,
@@ -34,6 +38,10 @@ enum actions{
 
 /****************************/
 // Rule
+/*! \brief Rule class
+ *
+ * Rule that is created by user is represented by this class
+ */
 class Rule
 {
 public:
@@ -76,7 +84,10 @@ private:
     QString name;
 };
 
-
+/*! \brief Condition structure
+ *
+ * Structure where is saved all needed for one condition
+ */
 struct Condition{
     int operand;
     QString property;

@@ -36,7 +36,7 @@ void CopyCommand::Undo(){
     logsOut->insertHtml("Copied file " + file +" was removed from " + destination +"<br>");
 }
 
-// Only move to trash folder
+/// Only move to trash folder
 void DeleteCommand::Execute(){
     QFile::rename(path,destination+file);
     logsOut->insertHtml("File " + file +" was moved to trash <br>");

@@ -21,17 +21,17 @@ Attribute::~Attribute()
     operators.clear();
 }
 
-// Name of attribute
+/// Name of attribute
 QString Attribute::GetName(){
     return name;
 }
 
-// Possible operations with that attribute
+/// Possible operations with that attribute
 std::vector<int> Attribute::GetPropertyOperations(){
     return operators;
 }
 
-// Type of attribute (date/num/str)
+/// Type of attribute (date/num/str)
 int Attribute::GetPropertyType(){
     return type;
 }

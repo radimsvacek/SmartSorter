@@ -13,6 +13,10 @@
 
 /****************************/
 // Operation
+/*! \brief Operation class
+ *
+ * Class represents one operation with file, contains destination & distribution path
+ */
 class Operation{
 	public:
 		Operation();

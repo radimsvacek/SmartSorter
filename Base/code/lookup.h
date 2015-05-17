@@ -19,6 +19,10 @@
 
 /****************************/
 // LookUp
+/*! \brief Look inside folder for files
+ *
+ * This class is needed for looking up in folders for files
+ */
 class LookUp{
 	public:
 		// Constuctor & Destructor

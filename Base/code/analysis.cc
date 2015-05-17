@@ -6,15 +6,16 @@
 
 #include "analysis.h"
 
-// Constructor -> initialize all variables to null
+
+/// Constructor -> initialize all variables to null
 Analysis::Analysis(){
     NullIt();
 }
 
-// Nothing more to destroy
+/// Nothing more to destroy
 Analysis::~Analysis(){}
 
-// Clear all variables
+/// Clear all variables
 void Analysis::NullIt(){
     allFiles=0;
     allFilesSize=0;
@@ -30,7 +31,7 @@ void Analysis::NullIt(){
     duplicityFiles=0;
 }
 
-// Analyze another file and save infos
+/// Analyze another file and save infos
 void Analysis::AddFile(QFileInfo F){
 
     allFiles++;
@@ -61,7 +62,7 @@ void Analysis::AddFile(QFileInfo F){
 	}	
 }
 
-// Result of analysis
+/// Result of analysis
 QString Analysis::PrintResults(){
     QString analysisTextResult = "";
 
@@ -91,7 +92,7 @@ QString Analysis::PrintResults(){
 
 }
 
-// Convert to proper unit
+/// Convert to proper unit
 QString Analysis::GetSizeInProperUnit(int size){
     QString unit = "B";
     if(size>KILO){

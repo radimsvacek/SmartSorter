@@ -6,8 +6,7 @@
 
 #include "html_plugin.h"
 
-// Plugin initialization
-// Create properities which can be compared
+/// Plugin initialization, Create properities which can be compared
 void HTML_plugin::Initialize(){
     Attribute *a;
     std::vector<int> ops;
@@ -50,13 +49,13 @@ QString HTML_plugin::GetName()
     return "HTML";
 }
 
-// Supported extensions
+/// Supported extensions
 QStringList HTML_plugin::GetExtensions()
 {
     return AVIABLE_EXTENSIONS;
 }
 
-// Properties supported by this plugin
+/// Properties supported by this plugin
 QStringList HTML_plugin::GetProperties()
 {
     QStringList list;
@@ -69,12 +68,12 @@ QStringList HTML_plugin::GetProperties()
     return list;
 }
 
-// Returns properties which can be used for distribution
+/// Returns properties which can be used for distribution
 QStringList HTML_plugin::GetPropertiesForDistribution(){
     return PROPERTIES_FOR_DISTRIBUTION;
 }
 
-// Returns vector of property operations
+/// Returns vector of property operations
 std::vector<int> HTML_plugin::GetPropertyOperations(QString property){
     for(auto propertyIterator = properties.begin(); propertyIterator != properties.end(); ++propertyIterator){
         if(((*propertyIterator)->GetName())==property)
@@ -83,7 +82,7 @@ std::vector<int> HTML_plugin::GetPropertyOperations(QString property){
     return std::vector<int>();
 }
 
-// Returns type of specific property
+/// Returns type of specific property
 int HTML_plugin::GetPropertyType(QString arg){
     for(auto propertyIterator = properties.begin(); propertyIterator != properties.end(); ++propertyIterator){
         if(((*propertyIterator)->GetName())==arg)
@@ -92,7 +91,7 @@ int HTML_plugin::GetPropertyType(QString arg){
     return 0;
 }
 
-// Returns if fileFormat is supported by this plugin
+/// Returns if fileFormat is supported by this plugin
 bool HTML_plugin::IsSupportedFormat(QString fileFormat){
     foreach(QString str,AVIABLE_EXTENSIONS){
         if(str.compare(fileFormat,Qt::CaseInsensitive) == 0)
@@ -101,7 +100,7 @@ bool HTML_plugin::IsSupportedFormat(QString fileFormat){
     return false;
 }
 
-// Returns values for file distribution
+/// Returns values for file distribution
 QString HTML_plugin::GetPropertyValueForDistribution(File *file, QString property){
    if(!PROPERTIES_FOR_DISTRIBUTION.contains(property))
        return "";
@@ -112,7 +111,7 @@ QString HTML_plugin::GetPropertyValueForDistribution(File *file, QString propert
        return meta;
 }
 
-// Resolver for properties in this plugin
+/// Resolver for properties in this plugin
 bool HTML_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QString property){
     QString fileProperty = GetMetaData(file->GetPath(),property);
     QString branchValue = branch->GetStringValue();
@@ -128,7 +127,7 @@ bool HTML_plugin::IsFileFullfillCondition(TreeBranch *branch, File *file, QStrin
     return false;
 }
 
-// Open file and load it as qwebview, return required data
+/// Open file and load it as qwebview, return required data
 QString HTML_plugin::GetMetaData(QString filePath, QString what){
     QFile F(filePath);
 
@@ -152,7 +151,7 @@ QString HTML_plugin::GetMetaData(QString filePath, QString what){
     return GetSpecicifMeta(what,meta);
 }
 
-// Returns string, which contains required metadata of html file
+/// Returns string, which contains required metadata of html file
 QString HTML_plugin::GetSpecicifMeta(QString which, QMultiMap<QString,QString> meta){
     foreach(QString key,meta.keys()){
         if(key.compare(which,Qt::CaseInsensitive) == 0){

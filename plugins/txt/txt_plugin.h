@@ -13,7 +13,10 @@
 #include <QDebug>
 #include "plugin_interface.h"
 
-
+/*! \brief TXT plugin
+ *
+ * Can return statistical info about txt file
+ */
 class TXT_plugin : public QObject, public PluginInterface
 {
     Q_OBJECT

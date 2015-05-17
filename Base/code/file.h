@@ -16,6 +16,10 @@
 
 /****************************/
 // File
+/*! \brief Represents file
+ *
+ * Each instance of this class stands for one file, contains info about this file
+ */
 class File{
 	public:
 		File();

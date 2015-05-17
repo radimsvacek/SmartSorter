@@ -35,6 +35,10 @@ namespace Ui {
 class MainWindow;
 }
 
+/*! \brief Main window of application
+ *
+ * Methods that provides data for main window
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

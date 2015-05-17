@@ -6,7 +6,7 @@
 
 #include "basic_classif.h"
 
-// Create some basic attributes with can be used for every file format
+/// Create some basic attributes with can be used for every file format
 BasicClassification::BasicClassification(){
     Attribute *newAttribute;
     std::vector<int> attributeOperations;
@@ -35,7 +35,7 @@ BasicClassification::BasicClassification(){
 
 }
 
-// Clean memory
+/// Clean memory
 BasicClassification::~BasicClassification(){
     for(auto pluginsIterator = PluginsFormats.begin(); pluginsIterator != PluginsFormats.end(); ++pluginsIterator) {
         delete (*pluginsIterator);
@@ -48,7 +48,7 @@ BasicClassification::~BasicClassification(){
     properties.clear();
 }
 
-// Returns names of loaded plugins .. just for info
+/// Returns names of loaded plugins .. just for info
 QStringList BasicClassification::GetLoadedPlugins(){
     QStringList namesList;
     for(auto pluginsIterator = PluginsFormats.begin(); pluginsIterator != PluginsFormats.end(); ++pluginsIterator) {
@@ -57,7 +57,7 @@ QStringList BasicClassification::GetLoadedPlugins(){
     return namesList;
 }
 
-// Find and load plugins in folder "plugins"
+/// Find and load plugins in folder "plugins"
 void BasicClassification::LoadPlugins(){
     QDir pluginsDir = QDir(qApp->applicationDirPath());
     pluginsDir.cd("plugins");
@@ -72,7 +72,7 @@ void BasicClassification::LoadPlugins(){
     }
 }
 
-// Initialize plugin and store pointer to that in vector
+/// Initialize plugin and store pointer to that in vector
 void BasicClassification::InitializePlugin(QObject *plugin){
     PluginInterface *importedPlugin = qobject_cast<PluginInterface *>(plugin);
     if(importedPlugin){
@@ -82,7 +82,7 @@ void BasicClassification::InitializePlugin(QObject *plugin){
     }
 }
 
-// Load properties for GUI dialog
+/// Load properties for GUI dialog
 QStringList BasicClassification::GetProperties(QString format){
     QStringList listToReturn;
     // Format was not selected -> no properties to choose
@@ -114,7 +114,7 @@ QStringList BasicClassification::GetProperties(QString format){
 }
 
 
-// Load properties for distribution to DIALOG
+/// Load properties for distribution to DIALOG
 QStringList BasicClassification::GetPropertiesForDistribution(QString format){
     QStringList listToReturn;
     listToReturn = BASIC_DISTRIBUTION_PROPERTIES;
@@ -131,12 +131,12 @@ QStringList BasicClassification::GetPropertiesForDistribution(QString format){
 }
 
 
-// Load file formats for GUI dialog
+/// Load file formats for GUI dialog
 QStringList BasicClassification::GetFileFormats(){
     return QStringList() << GENERAL_FORMATS << SPECIFIC_FORMATS;
 }
 
-// Load file formats for GUI dialog
+/// Load file formats for GUI dialog
 QString BasicClassification::GetGeneralFileFormat(QString format){
 
     foreach(QString str,PICTURE_FORMATS){
@@ -172,7 +172,7 @@ QString BasicClassification::GetGeneralFileFormat(QString format){
     return QString();
 }
 
-// Load each property's possible operations for GUI dialog
+/// Load each property's possible operations for GUI dialog
 std::vector<int> BasicClassification::GetPropertyOperations(QString property,QString fileFormat){
     for(auto propertiesIterator = properties.begin(); propertiesIterator != properties.end(); ++propertiesIterator){
         if(((*propertiesIterator)->GetName())==property)
@@ -189,7 +189,7 @@ std::vector<int> BasicClassification::GetPropertyOperations(QString property,QSt
     return std::vector<int>();
 }
 
-// Load type of property for GUI dialog
+/// Load type of property for GUI dialog
 int BasicClassification::GetPropertyType(QString arg,QString fileFormat){
     for(auto propertiesIterator = properties.begin(); propertiesIterator != properties.end(); ++propertiesIterator){
         if(((*propertiesIterator)->GetName())==arg)
@@ -205,7 +205,7 @@ int BasicClassification::GetPropertyType(QString arg,QString fileFormat){
     return 0;
 }
 
-// Returning true if format is basic format, otherwise false if attribute is general format (like Audio etc)
+/// Returning true if format is basic format, otherwise false if attribute is general format (like Audio etc)
 bool BasicClassification::IsGeneralFormat(QString attribute){
 
     foreach(QString str,GENERAL_FORMATS){
@@ -215,7 +215,7 @@ bool BasicClassification::IsGeneralFormat(QString attribute){
     return false;
 }
 
-// Returning true, if property is basic attribute that can be compared in this class
+/// Returning true, if property is basic attribute that can be compared in this class
 bool BasicClassification::IsBasicProperty(QString property){
     for(auto propertiesIterator = properties.begin(); propertiesIterator != properties.end(); ++propertiesIterator){
         if(((*propertiesIterator)->GetName())==property)
@@ -224,7 +224,7 @@ bool BasicClassification::IsBasicProperty(QString property){
     return false;
 }
 
-// Check if file fullfilled condition in specicif branch of node
+/// Check if file fullfilled condition in specicif branch of node
 bool BasicClassification::IsFileFullfilCondition(TreeBranch * branch, File * file, QString property){
 
     // If is it only walkthrough branch, immediately return true
@@ -269,7 +269,7 @@ bool BasicClassification::IsFileFullfilCondition(TreeBranch * branch, File * fil
 
 
 
-// Comparing size
+/// Comparing size
 bool BasicClassification::IsSizeConditionTrue(TreeBranch * branch, File * file){
     switch(branch->GetOperand()){
         case LESS:
@@ -286,7 +286,7 @@ bool BasicClassification::IsSizeConditionTrue(TreeBranch * branch, File * file){
     return false;
 }
 
-// Comparing creation date
+/// Comparing creation date
 bool BasicClassification::IsCreationDateConditionTrue(TreeBranch * branch, File * file){
     switch(branch->GetOperand()){
         case LESS:
@@ -303,7 +303,7 @@ bool BasicClassification::IsCreationDateConditionTrue(TreeBranch * branch, File 
     return false;
 }
 
-// Comparing last modification date
+/// Comparing last modification date
 bool BasicClassification::IsLastModificationDateConditionTrue(TreeBranch * branch, File * file){
     switch(branch->GetOperand()){
         case LESS:
@@ -320,7 +320,7 @@ bool BasicClassification::IsLastModificationDateConditionTrue(TreeBranch * branc
     return false;
 }
 
-// Comparing name
+/// Comparing name
 bool BasicClassification::IsNameConditionTrue(TreeBranch * branch, File * file){
     switch(branch->GetOperand()){
         case EQUAL:
@@ -333,7 +333,7 @@ bool BasicClassification::IsNameConditionTrue(TreeBranch * branch, File * file){
     return false;
 }
 
-// Comparing extension
+/// Comparing extension
 bool BasicClassification::IsExtensionConditionTrue(TreeBranch * branch, File * file){
     switch(branch->GetOperand()){
         case EQUAL:
@@ -346,7 +346,7 @@ bool BasicClassification::IsExtensionConditionTrue(TreeBranch * branch, File * f
     return false;
 }
 
-// Returning exact path for specific file based on file's properties
+/// Returning exact path for specific file based on file's properties
 QString BasicClassification::GetDistributionPath(QString distribution,File *file){
     if(distribution.isEmpty())
         return "";
@@ -362,7 +362,7 @@ QString BasicClassification::GetDistributionPath(QString distribution,File *file
     return result;
 }
 
-// Returning property of specific file
+/// Returning property of specific file
 QString BasicClassification::GetNextFolderForDistribution(QString property, File *file){
     if(property == "Year")
         return QString::number(file->GetCreationYear());
