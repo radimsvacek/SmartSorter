@@ -7,6 +7,7 @@ App's functionality can be expanded by plugins. Each plugin is for classificatio
 
 ##Installation
 See the INSTALL file for details. 
+
 Very easy to install, only in three commands. Make sure you have all needed libraries.
 
 ##License
