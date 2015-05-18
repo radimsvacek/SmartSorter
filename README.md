@@ -19,3 +19,7 @@ Very easy to install, only in three commands. Make sure you have all needed libr
  - Poppler
  - LibExif
  - Perl & Python interpret (fdupe & facedetect scripts)
+ - 
+ 
+##Other
+App was created as part of bachelor thesis on FIT VUT in BRNO. 2015
